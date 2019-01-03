@@ -10,8 +10,8 @@ phases:
       - cd $CODEBUILD_SRC_DIR/thermostat-service/timeseries
       - npm run test
       - cd $CODEBUILD_SRC_DIR
-      - ./package.sh
-      - ./deploy.sh
+      - /bin/bash ./package.sh
+      - /bin/bash ./deploy.sh
     finally:
 artifacts:
   files:
