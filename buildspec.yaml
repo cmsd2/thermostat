@@ -1,0 +1,24 @@
+version: 0.2
+            
+phases:
+  pre_build:
+    run-as: Linux-user-name
+    commands:
+      - cd $CODEBUILD_SRC_DIR/thermostat-service/timeseries
+      - npm install
+  build:
+    commands:
+      - cd $CODEBUILD_SRC_DIR/thermostat-service/timeseries
+      - npm run test
+      - cd $CODEBUILD_SRC_DIR/thermostat-service
+      - ./package.sh
+      - ./deploy.sh
+    finally:
+artifacts:
+  files:
+    - thermostat-service/packaged.yaml
+  discard-paths: yes
+  base-directory: location
+cache:
+  paths:
+    - thermostat-service/timeseries/node_modules
