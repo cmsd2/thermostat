@@ -3,7 +3,6 @@ version: 0.2
 phases:
   pre_build:
     commands:
-      - pip install --upgrade aws-sam-cli
       - cd $CODEBUILD_SRC_DIR/thermostat-service/timeseries
       - npm install
   build:
