@@ -9,13 +9,13 @@ phases:
     commands:
       - cd $CODEBUILD_SRC_DIR/thermostat-service/timeseries
       - npm run test
-      - cd $CODEBUILD_SRC_DIR/thermostat-service
+      - cd $CODEBUILD_SRC_DIR
       - ./package.sh
       - ./deploy.sh
     finally:
 artifacts:
   files:
-    - thermostat-service/packaged.yaml
+    - packaged.yaml
   discard-paths: yes
   base-directory: location
 cache:
