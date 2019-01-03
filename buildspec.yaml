@@ -17,7 +17,6 @@ artifacts:
   files:
     - packaged.yaml
   discard-paths: yes
-  base-directory: location
 cache:
   paths:
     - thermostat-service/timeseries/node_modules
