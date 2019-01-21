@@ -10,6 +10,13 @@ Globals:
     Function:
         Timeout: 3
 
+Parameters:
+    RestApiName:
+        Type: String
+        Default: thermostat
+    RestApiProdName:
+        Type: String
+        Default: Prod
 
 Resources:
 
@@ -25,15 +32,26 @@ Resources:
             Events:
                 GetTimeseriesApi:
                     Type: Api # More info about API Event Source: https://github.com/awslabs/serverless-application-model/blob/master/versions/2016-10-31.md#api
+                    RestApiId: !Ref 'RestApi'
                     Properties:
                         Path: /timeseries
                         Method: get
                 PostTimeseriesApi:
                     Type: Api # More info about API Event Source: https://github.com/awslabs/serverless-application-model/blob/master/versions/2016-10-31.md#api
+                    RestApiId: !Ref 'RestApi'
                     Properties:
                         Path: /timeseries
                         Method: post
 
+    RestApi:
+        Type: AWS::Serverless::Api
+        Properties:
+          Name: todo
+          StageName: !Ref 'RestApiProdName'
+          Variables:
+            Name: !Ref 'RestApiName'
+            StageName: !Ref 'RestApiProdName'
+          
 Outputs:
 
     TimeseriesApi:
